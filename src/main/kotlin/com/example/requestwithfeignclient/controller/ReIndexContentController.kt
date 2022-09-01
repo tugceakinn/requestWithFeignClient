@@ -1,21 +1,35 @@
 package com.example.requestwithfeignclient.controller
 
 import com.example.requestwithfeignclient.client.TranslationApiClient
+import com.example.requestwithfeignclient.models.ProductContentRequest
 import com.example.requestwithfeignclient.models.ReIndexResponse
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/reindex-content")
 class ReIndexContentController(val translationApiClient: TranslationApiClient) {
-
+/*
         @PostMapping()
-         fun reIndex(@RequestParam ids: Set<Long>, @RequestParam language: Language): ReIndexResponse {
+         fun reIndexByQueryParam(@RequestParam ids: Set<Long>, @RequestParam language: Language): ReIndexResponse {
             ids.parallelStream().forEach{
                 translationApiClient.reindex(it,language.name)
             }
            return ReIndexResponse("reindex başarılı")
 
         }
+
+
+ */
+        @PostMapping()
+        fun reIndex(@RequestBody request: ProductContentRequest, @RequestParam language: Language): ReIndexResponse {
+            request.contentIds.forEach{contentId->
+                translationApiClient.reindex(contentId,language.name)
+            }
+
+
+        return ReIndexResponse("reindex başarılı")
+
+    }
 }
 
 enum class Language{

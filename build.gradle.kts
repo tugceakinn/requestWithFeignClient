@@ -28,6 +28,8 @@ dependencies {
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.mockk:mockk:1.12.2")
+    implementation("org.springframework.boot:spring-boot-starter-data-elasticsearch")
+    compileOnly("org.projectlombok:lombok:0.11.0")
 }
 
 dependencyManagement {
